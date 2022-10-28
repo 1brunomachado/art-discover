@@ -81,15 +81,19 @@ axios
       repository: repository,
     };
 
-    createGallery(
-      data.name,
-      data.nationality,
-      data.image,
-      data.title,
-      data.dimensions,
-      data.date,
-      data.repository
-    );
+    if (data.image == "") {
+      location.reload();
+    } else {
+      createGallery(
+        data.name,
+        data.nationality,
+        data.image,
+        data.title,
+        data.dimensions,
+        data.date,
+        data.repository
+      );
+    }
   })
   .catch((error) => {
     // manipula erros da requisição
