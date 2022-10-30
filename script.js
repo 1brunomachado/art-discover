@@ -1,104 +1,89 @@
-const discover = document.querySelector(".discover");
-
-function createGallery(
-  nameArt,
-  nationalityArt,
-  imageArt,
-  titleArt,
-  dimensionsArt,
-  dateArt,
-  repositoryArt
-) {
-  let gallery = document.createElement("div");
-  gallery.classList = `gallery`;
-  discover.appendChild(gallery);
-
-  let image = document.createElement("img");
-  image.classList = "gallery__image";
-  image.setAttribute("src", imageArt);
-  gallery.appendChild(image);
-
-  let name = document.createElement("h2");
-  name.classList = "gallery__name";
-  name.textContent = nameArt;
-  gallery.appendChild(name);
-
-  let title = document.createElement("h1");
-  title.classList = "gallery__title";
-  title.textContent = titleArt;
-  gallery.appendChild(title);
-
-  let date = document.createElement("p");
-  date.classList = "gallery__date";
-  date.textContent = dateArt;
-  gallery.appendChild(date);
-
-  let nationality = document.createElement("p");
-  nationality.classList = "gallery__nationality";
-  nationality.textContent = nationalityArt;
-  gallery.appendChild(nationality);
-
-  let dimensions = document.createElement("p");
-  dimensions.classList = "gallery__dimensions";
-  dimensions.textContent = dimensionsArt;
-  gallery.appendChild(dimensions);
-
-  let repository = document.createElement("p");
-  repository.classList = "gallery__repository";
-  repository.textContent = repositoryArt;
-  gallery.appendChild(repository);
-}
-
+// generate an ID
 let RANDOM_ID = Math.floor(Math.random() * 50000);
 
-// https://metmuseum.github.io/
+// makes a request to a user with a specific ID
+function requestApi() {
+  axios
+    .get(`https://api.artic.edu/api/v1/artworks/${RANDOM_ID}`)
+    .then((response) => {
+      // handle request success
+      const {
+        image_id,
+        title,
+        date_display,
+        artist_title,
+        artist_id,
+        place_of_origin,
+        date_end,
+        dimensions,
+        credit_line,
+      } = response.data.data;
 
-axios
-  .get(
-    `https://collectionapi.metmuseum.org/public/collection/v1/objects/${RANDOM_ID}`
-  )
-  .then((response) => {
-    // manipula o sucesso da requisição
-    console.log(response.data);
+      const data = {
+        image: `https://www.artic.edu/iiif/2/${image_id}/full/843,/0/default.jpg`,
+        title: title,
+        date: date_display,
+        artist: artist_title,
+        link: `https://www.artic.edu/artists/${artist_id}`,
+        place: place_of_origin,
+        published: date_end,
+        dimensions: dimensions,
+        credit: credit_line,
+      };
 
-    const {
-      artistDisplayName,
-      artistNationality,
-      primaryImageSmall,
-      title,
-      dimensions,
-      objectDate,
-      repository,
-    } = response.data;
-
-    const data = {
-      name: artistDisplayName,
-      nationality: artistNationality,
-      image: primaryImageSmall,
-      title: title,
-      dimensions: dimensions,
-      date: objectDate,
-      repository: repository,
-    };
-
-    if (data.image == "") {
-      location.reload();
-    } else {
       createGallery(
-        data.name,
-        data.nationality,
         data.image,
         data.title,
-        data.dimensions,
         data.date,
-        data.repository
+        data.artist,
+        data.link,
+        data.place,
+        data.published,
+        data.dimensions,
+        data.credit
       );
-    }
-  })
-  .catch((error) => {
-    // manipula erros da requisição
-    console.error(error);
-  })
-  .then(() => {
-    // sempre será executado
-  });
+    })
+    .catch(() => {
+      //handle request errors
+
+      location.reload();
+    })
+    .then(() => {
+      // will always run
+    });
+}
+
+requestApi();
+
+// select HTML elements
+const imageGallery = document.querySelector(".gallery__image");
+const titleGallery = document.querySelector(".gallery__title");
+const dateGallery = document.querySelector(".gallery__date");
+const artistGallery = document.querySelector(".gallery__artist");
+const placeGallery = document.querySelector(".gallery__place");
+const publishedGallery = document.querySelector(".gallery__published");
+const dimensionsGallery = document.querySelector(".gallery__dimensions");
+const creditGallery = document.querySelector(".gallery__credit");
+
+//function to insert information into HTML
+function createGallery(
+  image,
+  title,
+  date,
+  artist,
+  link,
+  place,
+  published,
+  dimensions,
+  credit
+) {
+  imageGallery.setAttribute("src", image);
+  titleGallery.textContent = title;
+  dateGallery.textContent = date;
+  artistGallery.textContent = artist;
+  artistGallery.setAttribute("href", link);
+  placeGallery.textContent = place;
+  publishedGallery.textContent = published;
+  dimensionsGallery.textContent = dimensions;
+  creditGallery.textContent = credit;
+}

@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&family=Source+Serif+Pro:wght@300&display=swap");
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Rubik", sans-serif;
+  font-size: 16px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.container {
+  max-width: 690px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.gallery {
+  &__cover {
+    display: flex;
+    background-color: #f3f3f3;
+    max-height: 750px;
+    padding: 100px 0;
+  }
+
+  &__image {
+    object-fit: contain;
+    max-width: 100%;
+  }
+
+  &__content {
+    margin: 40px auto;
+  }
+
+  &__title {
+    font-family: "Source Serif Pro", serif;
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  &__info {
+    display: grid;
+    row-gap: 4px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #f3f3f3;
+  }
+
+  &__date,
+  &__artist,
+  &__place,
+  &__published,
+  &__dimensions,
+  &__credit {
+    color: #767676;
+  }
+
+  .btn {
+    display: flex;
+    background: none;
+    font-weight: 600;
+    text-decoration: underline;
+    border: none;
+    margin: 32px auto 0;
+    cursor: pointer;
+  }
+
+  &__artist:hover,
+  .btn:hover {
+    text-decoration: none;
+  }
+}
+
+.github {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  font-size: 14px;
+  color: #767676;
+  text-decoration: none;
+  margin-bottom: 24px;
+}

@@ -4,12 +4,71 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
     <title>Art Discover</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet" />
   </head>
   <body>
-    <section class="discover"></section>
+    <section class="discover" data-aos="fade-down" data-aos-delay="800">
+      <div class="gallery">
+        <div class="gallery__cover">
+          <img class="container gallery__image" src="" alt="" />
+        </div>
+
+        <div class="gallery__content container">
+          <h1 class="gallery__title"></h1>
+
+          <p class="gallery__date"></p>
+
+          <div class="gallery__info">
+            <h2>Artist</h2>
+            <a target="_blank" class="gallery__artist"></a>
+          </div>
+
+          <div class="gallery__info">
+            <h2>Place</h2>
+            <p class="gallery__place"></p>
+          </div>
+
+          <div class="gallery__info">
+            <h2>Published</h2>
+            <p class="gallery__published"></p>
+          </div>
+
+          <div class="gallery__info">
+            <h2>Dimensions</h2>
+            <p class="gallery__dimensions"></p>
+          </div>
+
+          <div class="gallery__info">
+            <h2>Credite Line</h2>
+            <p class="gallery__credit"></p>
+          </div>
+
+          <button class="btn" onclick="location.reload()">Art Discover</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="container">
+      <a class="github" href="https://github.com/codebruno" target="_blank">
+        <i class="ri-github-fill"></i>
+        GitHub
+      </a>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
   </body>
 </html>
